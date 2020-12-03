@@ -6,7 +6,6 @@ pool:
 
 variables:
   imageName: 'pipelines-javascript-docker'
-  dockerHub: 'DockerHub_Connection'
 
 steps:
 - task: Docker@2
@@ -15,10 +14,9 @@ steps:
     repository: $(imageName)
     command: build
     Dockerfile: app/Dockerfile
-- task: Docker@2
+- task: Docker@3
   displayName: Push image
   inputs:
-    containerRegistry: |
-      $(dockerHub)
+    containerRegistry: DockerHub_Connection
     repository: $(imageName)
     command: push   
